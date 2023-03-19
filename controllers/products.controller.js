@@ -2,16 +2,16 @@ const Product = require("../models/product");
 
 exports.index = (req, res, next) => {
     Product.index((products) => {
-        res.render("shop", {pageTitle: "Shop", products: products, path: "/"});
+        res.render("front/index", {pageTitle: "Shop", products: products, path: "/"});
     });
 }
 
-exports.create = (req, res, next) => {
-    res.render("add-product", {pageTitle: "Add new product", path: "/admin/add-product"});
-};
+exports.products = (req, res, next) => {
+    Product.index((products) => {
+        res.render("front/products", {pageTitle: "Shop", products: products, path: "/products"});
+    });
+}
 
-exports.store = (req, res, next) => {
-    let product = new Product(req.body.title);
-    product.save();
-    res.redirect("/");
+exports.cart = (req, res, next) => {
+    res.render("front/cart", {pageTitle: "Cart", path: "/cart"});
 };
