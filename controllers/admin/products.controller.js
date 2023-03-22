@@ -19,3 +19,26 @@ exports.store = (req, res, next) => {
     product.save();
     res.redirect("/admin/products");
 };
+
+exports.show = (req, res, next) => {
+    let id = req.params.id;
+    Product.find(id, product => {
+        
+        res.end();
+    })
+};
+
+exports.edit = (req, res, next) => {
+    let id = req.params.id;
+    res.end();
+};
+
+exports.update = (req, res, next) => {
+    let id = req.params.id;
+    res.end();
+};
+
+exports.delete = (req, res, next) => {
+    let id = req.params.id;
+    res.end();
+};

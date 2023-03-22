@@ -15,6 +15,7 @@ const readDataFromFile = callback => {
 
 class Product {
     constructor(title, imageUrl, price, description) {
+        this.id = Math.random().toString();
         this.title = title;
         this.imageUrl = imageUrl;
         this.price = price;
@@ -32,6 +33,13 @@ class Product {
 
     static index(callback) {
         readDataFromFile(callback);
+    }
+
+    static find(id, callback) {
+        readDataFromFile(products => {
+            const product = products.find(product => product.id === id);
+            callback(product);
+        })
     }
 }
 
