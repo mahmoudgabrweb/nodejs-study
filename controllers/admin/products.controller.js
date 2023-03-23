@@ -1,4 +1,5 @@
 const Product = require("../../models/product");
+const {products} = require("../products.controller");
 
 exports.index = (req, res, next) => {
     Product.index(products => {
@@ -23,22 +24,29 @@ exports.store = (req, res, next) => {
 exports.show = (req, res, next) => {
     let id = req.params.id;
     Product.find(id, product => {
-        
         res.end();
     })
 };
 
 exports.edit = (req, res, next) => {
     let id = req.params.id;
-    res.end();
+    Product.find(id, product => {
+        res.render("admin/products/edit", {
+            pageTitle: "Edit Product",
+            path: `/admin/products/${id}/edit`,
+            product: product
+        });
+    })
 };
 
 exports.update = (req, res, next) => {
     let id = req.params.id;
-    res.end();
+    Product.update(id, req.body);
+    res.redirect("/admin/products");
 };
 
 exports.delete = (req, res, next) => {
     let id = req.params.id;
-    res.end();
+    Product.delete(id);
+    res.redirect("/admin/products");
 };
