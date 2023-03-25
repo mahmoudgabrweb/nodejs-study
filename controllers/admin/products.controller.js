@@ -1,4 +1,4 @@
-const Product = require("../../models/product");
+const Product = require("../../models/product.model");
 const {products} = require("../products.controller");
 
 exports.index = (req, res, next) => {

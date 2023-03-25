@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
+const sequelize = require('./util/database');
 
 const app = express();
 
@@ -19,4 +20,7 @@ app.use(frontRoutes);
 
 app.use(generalController.get404);  // will be executed for each incoming request
 
-app.listen(3000);
+sequelize.sync().then(result => {
+    app.listen(3000);
+}).catch(err => console.log({err}));
+
